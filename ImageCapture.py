@@ -1,6 +1,8 @@
 import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
+from typing import cast
+
 import mss
 from PIL import Image
 
@@ -57,7 +59,7 @@ class ImageCapture:
                 for index, region in enumerate(regions)
             }
             # Initializes a list to store the images in the correct order
-            images = [None] * len(regions)
+            images: list[ImageType] = [cast(ImageType, None)] * len(regions)
 
             # Fills the images as results are completed
             for future in as_completed(futures):
